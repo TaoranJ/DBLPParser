@@ -4,7 +4,7 @@
 import os
 import argparse
 
-from src.dblp_parser import parse_record
+from dblp_parser import parse_record
 
 
 if __name__ == "__main__":

@@ -1,44 +1,34 @@
 # DBLP Dataset Parser
 
-![Authour](https://img.shields.io/badge/Author-Zhang%20Hao%20(Isaac%20Changhau)-blue.svg) ![Python](https://img.shields.io/badge/Python-3.6.5-brightgreen.svg)
+The repo is forked from
+[IsaacChanghau/DBLPParser](https://github.com/IsaacChanghau/DBLPParser) with
+major codebase re-designed and bug fixed.
 
-It is a python parser for [DBLP dataset](https://dblp.uni-trier.de/), the XML format dumped file can be downloaded [here](http://dblp.org/xml/) from [DBLP Homepage](https://dblp.org/).
+This script provides a simple way to convert the `XML` file of original
+[DBLP Computer Science Bibliography](https://dblp.org/xml/) to a more
+user-friendly `JSON` format.
 
-This parser requires `dtd` file, so make sure you have both `dblp-XXX.xml` (dataset) and `dblp-XXX.dtd` files. Note that you also should guarantee that both `xml` and `dtd` files are in the same directory, and the name of `dtd` file shoud same as the name given in the `<!DOCTYPE>` tag of the `xml` file. Such information can be easily accessed through `head dblp-XXX.xml` command. As shown below
-```xml
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE dblp SYSTEM "dblp-2017-08-29.dtd">
-<dblp>
-<phdthesis mdate="2016-05-04" key="phd/dk/Heine2010">
-<author>Carmen Heine</author>
-<title>Modell zur Produktion von Online-Hilfen.</title>
-...
+The script was tested on DBLP screenshot published on `2019-04-29` which has
+`6,850,920` in total.
+
+## Installation
+
+```bash
+pip install lxml
 ```
 
-A sample to use the parser:
-```python
-def main():
-    dblp_path = 'dataset/dblp.xml'
-    save_path = 'article.json'
-    try:
-        context_iter(dblp_path)
-        log_msg("LOG: Successfully loaded \"{}\".".format(dblp_path))
-    except IOError:
-        log_msg("ERROR: Failed to load file \"{}\". Please check your XML and DTD files.".format(dblp_path))
-        exit()
-    parse_article(dblp_path, save_path, save_to_csv=False)  # default save as json format
+## Usage
+
+1. Download `dblp.xml.gz` and `dblp.dtd` from
+[DBLP Computer Science Bibliography](https://dblp.org/xml/).
+2. Decompress `dblp.xml.gz`.
+3. Run the below script.
+
+```bash
+python main.py --dblp [path_to_dblp.xml] --output [output.json]
 ```
 
-Some extracted results:
-
-**Count the number of all different type of publications**:
-![general](/img/general.png)
-
-**Count the number of all different attributes among all publications**:
-![all_feature](/img/all_feature.png)
-
-**Count the number of five different features of articles**:
-![article_feature](/img/article_feature.png)
-
-**Distribution of published year of articles**:
-![article_year](/img/article_year.png)
+Each line of the generated document is a `JSON` record:
+```json
+{"author": ["Carmen Heine"], "title": "Modell zur Produktion von Online-Hilfen.", "year": "2010", "school": ["Aarhus University"], "pages": ["1-315"], "isbn": ["978-3-86596-263-8"], "ee": ["http://d-nb.info/996064095"], "genre": "phdthesis"}
+```
