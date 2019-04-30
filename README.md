@@ -17,7 +17,7 @@ pip install lxml
 1. Download `dblp.xml.gz` and `dblp.dtd` from
 [DBLP Computer Science Bibliography](https://dblp.org/xml/).
 2. Decompress `dblp.xml.gz`.
-3. Run the below script.
+3. Run the below script. Make sure that `dblp.xml` and `dblp.dtd` are in the same directory.
 
 ```bash
 python main.py --dblp [path_to_dblp.xml] --output [output.json]
