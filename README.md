@@ -4,7 +4,7 @@ The repo is forked from [IsaacChanghau/DBLPParser](https://github.com/IsaacChang
 
 This script provides a simple way to convert the `XML` datafile provided by [DBLP Computer Science Bibliography](https://dblp.org/xml/) to a user-friendly `JSON` format.
 
-The script was tested on DBLP screenshot published on `2019-04-29` which has `6,850,920` in total.
+The script was tested on DBLP screenshot published on `2019-04-29` which has `6,850,920` documents in total.
 
 ## Installation
 
